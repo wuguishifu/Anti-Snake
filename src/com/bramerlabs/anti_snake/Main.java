@@ -284,6 +284,7 @@ public class Main {
 
     public void gameOver() {
         maxLength = 15;
+        score = 0;
         state = gameOver;
     }
 
