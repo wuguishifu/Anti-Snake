@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.prefs.Preferences;
 
 public class Main {
 
@@ -154,13 +155,7 @@ public class Main {
     @SuppressWarnings("deprecation")
     private void init() {
         // read the high score
-        try {
-            File file = new File("src/com/bramerlabs/anti_snake/highscore");
-            Scanner input = new Scanner(file);
-            highScore = input.nextInt();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        highScore = readHighScore();
 
         // initialize the game
         gameInit();
@@ -348,15 +343,13 @@ public class Main {
 
     public void setHighScore(int newHighScore) {
         highScore = newHighScore;
-        String source = String.valueOf(highScore);
-        File file = new File("src/com/bramerlabs/anti_snake/highscore");
-        try {
-            FileWriter writer = new FileWriter(file);
-            writer.write(source);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Preferences prefs = Preferences.userNodeForPackage(Main.class);
+        prefs.put("high_score", String.valueOf(highScore));
+    }
+
+    public int readHighScore() {
+        Preferences prefs = Preferences.userNodeForPackage(Main.class);
+        return Integer.parseInt(prefs.get("high_score", "0"));
     }
 
 }
