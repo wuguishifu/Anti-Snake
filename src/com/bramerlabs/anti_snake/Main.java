@@ -282,6 +282,11 @@ public class Main {
         this.run();
     }
 
+    public void gameOver() {
+        maxLength = 15;
+        state = gameOver;
+    }
+
     /**
      * stops the application
      */

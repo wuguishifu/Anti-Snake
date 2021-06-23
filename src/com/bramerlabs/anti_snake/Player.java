@@ -70,7 +70,7 @@ public class Player {
     public void update(Snake snake) {
         for (int[] body : snake.getOccupied()) {
             if (this.x == body[0] && this.y == body[1]) {
-                main.setGameState(Main.gameOver);
+                main.gameOver();
             }
         }
     }
